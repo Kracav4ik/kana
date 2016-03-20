@@ -29,8 +29,23 @@ class MainWindow(QMainWindow):
         self.kana = QPixmap('data\\kana.png')
 
         self.scene = QGraphicsScene()
-        self.rectitem = MagicalRectItem(self.kana, 0, 0, 111, 100, 411, 318)
-        self.scene.addItem(self.rectitem)
+
+        kana_w = 111
+        kana_h = 100
+
+        kata_gap = 140
+        kata_x = 78
+        kata_y = 318
+
+        hira_gap = 138
+        hira_x = 1222
+        hira_y = 1190
+
+        for x in range(0, 11):
+            for y in range(5):
+                tex_x = kata_x + x * kana_w
+                tex_y = kata_y + y * kata_gap
+                self.scene.addItem(MagicalRectItem(self.kana, x * kana_w, y * kana_h, kana_w, kana_h, tex_x, tex_y))
         self.graphicsView.setScene(self.scene)
 
 if __name__ == '__main__':
