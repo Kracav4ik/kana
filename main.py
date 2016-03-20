@@ -4,7 +4,7 @@ from __future__ import division
 
 import sys
 
-from PyQt5.QtCore import QRectF
+from PyQt5.QtCore import QRectF, pyqtSlot
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem
 from PyQt5 import uic
@@ -46,7 +46,19 @@ class MainWindow(QMainWindow):
                 tex_x = kata_x + x * kana_w
                 tex_y = kata_y + y * kata_gap
                 self.scene.addItem(MagicalRectItem(self.kana, x * kana_w, y * kana_h, kana_w, kana_h, tex_x, tex_y))
+                break
+            break
         self.graphicsView.setScene(self.scene)
+
+        self.hiraCheck.clicked.connect(self.on_kana_check_clicked)
+        self.kataCheck.clicked.connect(self.on_kana_check_clicked)
+
+    @pyqtSlot()
+    def on_kana_check_clicked(self):
+        sender = self.sender()
+        if not self.hiraCheck.isChecked() and not self.kataCheck.isChecked():
+            other = self.hiraCheck if sender == self.kataCheck else self.kataCheck
+            other.setChecked(True)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
