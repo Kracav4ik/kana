@@ -36,18 +36,18 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>121</x>
-      <y>245</y>
+      <x>130</x>
+      <y>300</y>
       <width>133</width>
       <height>20</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="okButton">
     <property name="geometry">
      <rect>
-      <x>345</x>
-      <y>244</y>
+      <x>280</x>
+      <y>300</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -93,6 +93,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="nextButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>300</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
