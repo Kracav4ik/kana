@@ -5,7 +5,7 @@ from __future__ import division
 import sys
 
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene
 from PyQt5 import uic
 
 
@@ -16,7 +16,10 @@ class MainWindow(QMainWindow):
         uic.loadUi('kana.ui', self)
 
         self.kana = QPixmap('data\\kana.png')
-        self.label.setPixmap(self.kana)
+
+        self.scene = QGraphicsScene()
+        self.scene.addPixmap(self.kana)
+        self.graphicsView.setScene(self.scene)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
