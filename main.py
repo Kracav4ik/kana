@@ -7,7 +7,7 @@ import random
 
 from PyQt5.QtCore import QRectF, pyqtSlot
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem, QHeaderView
 from PyQt5 import uic
 
 
@@ -89,6 +89,9 @@ class MainWindow(QMainWindow):
         self.kana_rect = MagicalKanaRect(self.kana)
         self.scene.addItem(self.kana_rect)
         self.graphicsView.setScene(self.scene)
+
+        self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
         self.hiraCheck.clicked.connect(self.on_kana_check_clicked)
         self.kataCheck.clicked.connect(self.on_kana_check_clicked)
