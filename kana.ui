@@ -6,383 +6,382 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>856</width>
-    <height>542</height>
+    <width>566</width>
+    <height>296</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Kana</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>40</y>
-      <width>171</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="backgroundBrush">
-     <brush brushstyle="SolidPattern">
-      <color alpha="255">
-       <red>0</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </brush>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>300</y>
-      <width>133</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="okButton">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>300</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>OK</string>
-    </property>
-    <property name="default">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="kanaBox">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>320</y>
-      <width>92</width>
-      <height>73</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Азбуки</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QCheckBox" name="kataCheck">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="minimumSize">
+       <size>
+        <width>201</width>
+        <height>181</height>
+       </size>
+      </property>
+      <property name="backgroundBrush">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>341</width>
+        <height>181</height>
+       </size>
+      </property>
+      <widget class="QCheckBox" name="useO">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>150</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
        <property name="text">
-        <string>Катакана</string>
+        <string>Включить</string>
        </property>
        <property name="checked">
         <bool>true</bool>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="hiraCheck">
+      <widget class="QCheckBox" name="useA">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>70</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
        <property name="text">
-        <string>Хирагана</string>
+        <string>Включить</string>
        </property>
        <property name="checked">
         <bool>true</bool>
        </property>
       </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="nextButton">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>300</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Next</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="levelSlider">
-    <property name="geometry">
-     <rect>
-      <x>405</x>
-      <y>20</y>
-      <width>211</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>10</number>
-    </property>
-    <property name="pageStep">
-     <number>2</number>
-    </property>
-    <property name="value">
-     <number>9</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="tickPosition">
-     <enum>QSlider::TicksBelow</enum>
-    </property>
-    <property name="tickInterval">
-     <number>1</number>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>50</y>
-      <width>239</width>
-      <height>125</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="horizontalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="autoScroll">
-     <bool>false</bool>
-    </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
-    </property>
-    <property name="selectionMode">
-     <enum>QAbstractItemView::NoSelection</enum>
-    </property>
-    <property name="cornerButtonEnabled">
-     <bool>false</bool>
-    </property>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>20</number>
-    </attribute>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>20</number>
-    </attribute>
-    <attribute name="verticalHeaderDefaultSectionSize">
-     <number>20</number>
-    </attribute>
-    <attribute name="verticalHeaderMinimumSectionSize">
-     <number>20</number>
-    </attribute>
-    <row>
-     <property name="text">
-      <string>A</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string> I</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>U</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>E</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>O</string>
-     </property>
-    </row>
-    <column>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>K</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>S</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>T</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>N</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>H</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>M</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Y</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>R</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>W</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>N</string>
-     </property>
-    </column>
-    <item row="1" column="7">
-     <property name="text">
-      <string>X</string>
-     </property>
+      <widget class="QCheckBox" name="useI">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>90</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Включить</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>45</y>
+         <width>239</width>
+         <height>125</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="autoScroll">
+        <bool>false</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <property name="cornerButtonEnabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>20</number>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>20</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>20</number>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>20</number>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>A</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string> I</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>U</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>E</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>O</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>-</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>K</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>S</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>T</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>N</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>H</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>M</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>R</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>W</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>N</string>
+        </property>
+       </column>
+       <item row="1" column="7">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+       <item row="1" column="10">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+       <item row="2" column="9">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+       <item row="2" column="10">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+       <item row="3" column="7">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+       <item row="3" column="10">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+       <item row="4" column="10">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QSlider" name="levelSlider">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>15</y>
+         <width>211</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="pageStep">
+        <number>2</number>
+       </property>
+       <property name="value">
+        <number>9</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBelow</enum>
+       </property>
+       <property name="tickInterval">
+        <number>1</number>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="useE">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>130</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Включить</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="useU">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>110</y>
+         <width>70</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Включить</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <zorder>useO</zorder>
+      <zorder>useA</zorder>
+      <zorder>useI</zorder>
+      <zorder>tableWidget</zorder>
+      <zorder>levelSlider</zorder>
+      <zorder>useE</zorder>
+      <zorder>useU</zorder>
+      <zorder>kanaBox</zorder>
+     </widget>
     </item>
-    <item row="1" column="10">
-     <property name="text">
-      <string>X</string>
-     </property>
+    <item row="1" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="okButton">
+        <property name="text">
+         <string>OK</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="nextButton">
+        <property name="text">
+         <string>Next</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item row="2" column="9">
-     <property name="text">
-      <string>X</string>
-     </property>
+    <item row="1" column="2">
+     <widget class="QGroupBox" name="kanaBox">
+      <property name="title">
+       <string>Азбуки</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QCheckBox" name="hiraCheck">
+         <property name="text">
+          <string>Хирагана</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="kataCheck">
+         <property name="text">
+          <string>Катакана</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-    <item row="2" column="10">
-     <property name="text">
-      <string>X</string>
-     </property>
-    </item>
-    <item row="3" column="7">
-     <property name="text">
-      <string>X</string>
-     </property>
-    </item>
-    <item row="3" column="10">
-     <property name="text">
-      <string>X</string>
-     </property>
-    </item>
-    <item row="4" column="10">
-     <property name="text">
-      <string>X</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QCheckBox" name="useA">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>75</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Включить</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="useI">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>95</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Включить</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="useU">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>115</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Включить</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="useE">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>135</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Включить</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="useO">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>155</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Включить</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>856</width>
+     <width>566</width>
      <height>21</height>
     </rect>
    </property>
