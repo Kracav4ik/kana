@@ -82,7 +82,7 @@ class MainWindow(QMainWindow):
 
         uic.loadUi('kana.ui', self)
 
-        self.kana = QPixmap('data\\kana.png')
+        self.kana = QPixmap('data\\kana.jpg')
 
         self.scene = QGraphicsScene()
 
