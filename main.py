@@ -116,6 +116,8 @@ class MainWindow(QMainWindow):
             return
 
         kana_list = make_kana_list(self.levelSlider.value(), allowed_vowels)
+        if len(kana_list) > 1:
+            kana_list = [(x, y) for x, y in kana_list if get_kana(x, y) != self.kana_rect.kana]
         x, y = random.choice(kana_list)
 
         kana_modes = []
