@@ -86,6 +86,9 @@ class MainWindow(QMainWindow):
 
         self.hiraCheck.clicked.connect(self.on_kana_check_clicked)
         self.kataCheck.clicked.connect(self.on_kana_check_clicked)
+        self.lineEdit.returnPressed.connect(self.okButton.click)
+
+        self.on_nextButton_clicked()
 
     @pyqtSlot()
     def on_kana_check_clicked(self):
@@ -97,7 +100,19 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def on_nextButton_clicked(self):
         x, y = random.choice(kana_list)
-        self.kana_rect.set_kana(x, y, random.choice([True, False]))
+        kana_modes = []
+        if self.hiraCheck.isChecked():
+            kana_modes.append(False)
+        if self.kataCheck.isChecked():
+            kana_modes.append(True)
+        self.kana_rect.set_kana(x, y, random.choice(kana_modes))
+
+    @pyqtSlot()
+    def on_okButton_clicked(self):
+        text = self.lineEdit.text()
+        self.lineEdit.setText('')
+        if text.upper() == self.kana_rect.kana:
+            self.on_nextButton_clicked()
 
 
 if __name__ == '__main__':
