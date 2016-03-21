@@ -102,6 +102,8 @@ class MainWindow(QMainWindow):
             checkbox.clicked.connect(self.on_nextButton_clicked)
         self.levelSlider.valueChanged.connect(self.on_nextButton_clicked)
 
+        self.clearButton.clicked.connect(self.tabletWidget.clear_canvas)
+
         self.on_nextButton_clicked()
 
     @pyqtSlot()
