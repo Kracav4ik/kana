@@ -28,7 +28,8 @@ def has_kana(x, y):
     return 0 <= y < len(kana_map) and 0 <= x < len(kana_map[y]) and get_kana(x, y)
 
 
-kana_list = [(x, y) for x in range(11) for y in range(5) if has_kana(x, y)]
+def make_kana_list(level, allowed):
+    return [(x, y) for x in range(level, 11) for y in allowed if has_kana(x, y)]
 
 
 class MagicalKanaRect(QGraphicsRectItem):
@@ -56,6 +57,11 @@ class MagicalKanaRect(QGraphicsRectItem):
             y0 = hira_y0
 
         self.tex_rect = QRectF(x0 + x * kana_w, y0 + y * gap, kana_w, kana_h)
+        self.update()
+
+    def set_empty_kana(self):
+        self.tex_rect = QRectF(0, 0, kana_w, kana_h)
+        self.kana = ''
         self.update()
 
 kana_w = 111
@@ -87,6 +93,11 @@ class MainWindow(QMainWindow):
         self.hiraCheck.clicked.connect(self.on_kana_check_clicked)
         self.kataCheck.clicked.connect(self.on_kana_check_clicked)
         self.lineEdit.returnPressed.connect(self.okButton.click)
+        self.vowels = [self.useA, self.useI, self.useU, self.useE, self.useO]
+
+        for checkbox in self.vowels + [self.hiraCheck, self.kataCheck]:
+            checkbox.clicked.connect(self.on_nextButton_clicked)
+        self.levelSlider.valueChanged.connect(self.on_nextButton_clicked)
 
         self.on_nextButton_clicked()
 
@@ -99,12 +110,20 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_nextButton_clicked(self):
+        allowed_vowels = [number for number, checkbox in enumerate(self.vowels) if checkbox.isChecked()]
+        if not allowed_vowels:
+            self.kana_rect.set_empty_kana()
+            return
+
+        kana_list = make_kana_list(self.levelSlider.value(), allowed_vowels)
         x, y = random.choice(kana_list)
+
         kana_modes = []
         if self.hiraCheck.isChecked():
             kana_modes.append(False)
         if self.kataCheck.isChecked():
             kana_modes.append(True)
+
         self.kana_rect.set_kana(x, y, random.choice(kana_modes))
 
     @pyqtSlot()
