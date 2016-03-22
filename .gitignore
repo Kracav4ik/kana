@@ -4,3 +4,4 @@ ehthumbs.db
 build
 dist
 *.spec
+*.kana
