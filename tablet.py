@@ -68,3 +68,9 @@ class TabletWidget(QWidget):
 
         event.accept()
         self.update()
+
+    def save(self, path):
+        print('save to "%s"' % path)
+
+    def load(self, path):
+        print('load from "%s"' % path)

@@ -7,7 +7,7 @@ import random
 
 from PyQt5.QtCore import QRectF, pyqtSlot
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem, QHeaderView
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem, QHeaderView, QFileDialog
 from PyQt5 import uic
 
 
@@ -139,6 +139,22 @@ class MainWindow(QMainWindow):
         self.lineEdit.setText('')
         if text.upper() == self.kana_rect.kana:
             self.on_nextButton_clicked()
+
+    @pyqtSlot()
+    def on_saveButton_clicked(self):
+        # noinspection PyCallByClass,PyTypeChecker
+        save_path, _ = QFileDialog.getSaveFileName(self, 'Сохранение иероглифа', '', 'Кана (*.kana);;Все файлы (*)')
+        if not save_path:
+            return
+        self.tabletWidget.save(save_path)
+
+    @pyqtSlot()
+    def on_loadButton_clicked(self):
+        # noinspection PyCallByClass,PyTypeChecker
+        load_path, _ = QFileDialog.getOpenFileName(self, 'Сохранение иероглифа', '', 'Кана (*.kana);;Все файлы (*)')
+        if not load_path:
+            return
+        self.tabletWidget.load(load_path)
 
 
 if __name__ == '__main__':
