@@ -2,9 +2,11 @@
 import time
 import ast
 
-from PyQt5.QtCore import Qt, QPointF
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPainterPath
 from PyQt5.QtWidgets import QWidget
+
+from utils import Vec2d
 
 
 class Curve:
@@ -16,10 +18,10 @@ class Curve:
     def add_point(self, pos, pressure):
         current_time = time.time()
         if not self.points:
-            self.paint_path.moveTo(pos)
+            self.paint_path.moveTo(*pos)
             self.start_time = current_time
         else:
-            self.paint_path.lineTo(pos)
+            self.paint_path.lineTo(*pos)
         self.points.append((pos, pressure, current_time - self.start_time))
 
     def paint_to(self, painter):
@@ -27,18 +29,18 @@ class Curve:
         painter.drawPath(self.paint_path)
         painter.setPen(Qt.green)
         for pos, _p, _t in self.points:
-            painter.drawPoint(pos)
+            painter.drawPoint(*pos)
 
     def to_string_row(self):
         if not self.points:
             return '[]'
-        return '[(%s)]' % '), ('.join('%.4f,%.4f,%.4f' % (pos.x(), pos.y(), p) for pos, p, _ in self.points)
+        return '[(%s)]' % '), ('.join('%.4f,%.4f,%.4f' % (pos.x, pos.y, p) for pos, p, _ in self.points)
 
     def from_row(self, curve_row):
         self.points = []
         self.paint_path = QPainterPath()
         for pos_x, pos_y, pressure in curve_row:
-            self.add_point(QPointF(pos_x, pos_y), pressure)
+            self.add_point(Vec2d(pos_x, pos_y), pressure)
 
     def __bool__(self):
         return bool(self.points)
@@ -75,8 +77,9 @@ class TabletWidget(QWidget):
 
     def tabletEvent(self, event):
         pressure = event.pressure()
-        print('Tablet!', event.x(), event.y(), pressure)
-        self.current_curve.add_point(event.posF(), pressure)
+        pos = Vec2d.from_qt(event.posF())
+        print('Tablet!', pos, pressure)
+        self.current_curve.add_point(pos, pressure)
         if pressure == 0:
             print('  finished with', len(self.current_curve.points), 'points')
             self.create_curve()

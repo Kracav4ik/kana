@@ -24,6 +24,15 @@ class Vec2d:
     def __ne__(self, other):
         return not (self == other)
 
+    def __iter__(self):
+        return self.data.__iter__()
+
+    def __len__(self):
+        return self.data.__len__()
+
+    def __getitem__(self, idx):
+        return self.data[idx]
+
     def __pos__(self):
         return self
 
