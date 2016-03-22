@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPainterPath
 from PyQt5.QtWidgets import QWidget
 
+from detectors.bbox import AABB
 from utils import Vec2d
 
 
@@ -56,6 +57,7 @@ class TabletWidget(QWidget):
         self.curves_list = []
         ":type: list[PointsList]"
 
+        self.aabb = AABB()
         self.create_curve()
 
     def create_curve(self):
@@ -64,14 +66,21 @@ class TabletWidget(QWidget):
 
     def paintEvent(self, event):
         p = QPainter(self)
+
         p.setBrush(Qt.black)
         p.drawRect(self.rect())
         p.setBrush(Qt.NoBrush)
+
+        if self.aabb:
+            p.setPen(Qt.blue)
+            p.drawRect(self.aabb.x, self.aabb.y, self.aabb.w, self.aabb.h)
+
         for curve in self.curves_list:
             curve.paint_to(p)
 
     def clear_canvas(self):
         self.curves_list = []
+        self.aabb = AABB()
         self.create_curve()
         self.update()
 
@@ -80,6 +89,7 @@ class TabletWidget(QWidget):
         pos = Vec2d.from_qt(event.posF())
         print('Tablet!', pos, pressure)
         self.current_curve.add_point(pos, pressure)
+        self.aabb.extend(pos)
         if pressure == 0:
             print('  finished with', len(self.current_curve.points), 'points')
             self.create_curve()
