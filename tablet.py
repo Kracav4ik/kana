@@ -1,5 +1,4 @@
 # encoding: utf-8
-import time
 import ast
 
 from PyQt5.QtCore import Qt
@@ -12,34 +11,31 @@ from utils import Vec2d
 
 class Curve:
     def __init__(self):
-        self.start_time = 0
         self.points = []
-        self.paint_path = QPainterPath()
 
     def add_point(self, pos, pressure):
-        current_time = time.time()
-        if not self.points:
-            self.paint_path.moveTo(*pos)
-            self.start_time = current_time
-        else:
-            self.paint_path.lineTo(*pos)
-        self.points.append((pos, pressure, current_time - self.start_time))
+        self.points.append((pos, pressure))
 
     def paint_to(self, painter):
-        painter.setPen(Qt.red)
-        painter.drawPath(self.paint_path)
+        if len(self.points) > 1:
+            painter.setPen(Qt.red)
+            paint_path = QPainterPath()
+            paint_path.moveTo(*self.points[0][0])
+            for pos, _ in self.points[1:]:
+                paint_path.lineTo(*pos)
+            painter.drawPath(paint_path)
+
         painter.setPen(Qt.green)
-        for pos, _p, _t in self.points:
+        for pos, _ in self.points:
             painter.drawPoint(*pos)
 
     def to_string_row(self):
         if not self.points:
             return '[]'
-        return '[(%s)]' % '), ('.join('%.4f,%.4f,%.4f' % (pos.x, pos.y, p) for pos, p, _ in self.points)
+        return '[(%s)]' % '), ('.join('%.4f,%.4f,%.4f' % (pos.x, pos.y, p) for pos, p in self.points)
 
     def from_row(self, curve_row):
         self.points = []
-        self.paint_path = QPainterPath()
         for pos_x, pos_y, pressure in curve_row:
             self.add_point(Vec2d(pos_x, pos_y), pressure)
 
@@ -75,7 +71,7 @@ class TabletWidget(QWidget):
             p.setPen(Qt.blue)
             p.drawRect(self.aabb.x, self.aabb.y, self.aabb.w, self.aabb.h)
 
-        for curve in self.curves_list:
+        for curve in self.get_curves():
             curve.paint_to(p)
 
     def clear_canvas(self):
@@ -83,6 +79,9 @@ class TabletWidget(QWidget):
         self.aabb = AABB()
         self.create_curve()
         self.update()
+
+    def get_curves(self):
+        return [curve for curve in self.curves_list if curve]
 
     def tabletEvent(self, event):
         pressure = event.pressure()
@@ -100,9 +99,7 @@ class TabletWidget(QWidget):
     def save(self, path):
         with open(path, 'w') as f:
             f.write('[\n')
-            for curve in self.curves_list:
-                if not curve:
-                    continue
+            for curve in self.get_curves():
                 f.write('    %s,\n' % curve.to_string_row())
             f.write(']\n')
 
