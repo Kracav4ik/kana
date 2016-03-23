@@ -38,3 +38,6 @@ class AABB:
 
     def __bool__(self):
         return self.bbl is not None
+
+    def __str__(self):
+        return '[%s %s]' % (self.bbl, self.fur)

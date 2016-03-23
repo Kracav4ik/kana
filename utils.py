@@ -72,8 +72,14 @@ class Vec2d:
     def apply(self, fun):
         return Vec2d(fun(self.x), fun(self.y))
 
+    def rot_cw(self):
+        return Vec2d(self.y, -self.x)
+
+    def rot_ccw(self):
+        return Vec2d(-self.y, self.x)
+
     def __str__(self):
-        return '(%s, %s)' % self.data
+        return '(%.4f, %.4f)' % self.data
 
     def __repr__(self):
         return 'Vec2d(%s, %s)' % self.data
@@ -100,7 +106,7 @@ def cross(v1, v2):
     :type v1: Vec2d
     :type v2: Vec2d
     """
-    return v1.x * v2.y - v1.y * v2.x
+    return dot(v1, v2.rot_cw())
 
 
 def min_coords(v1, v2):
