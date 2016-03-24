@@ -22,18 +22,26 @@ class AABB:
 
     @property
     def x(self):
+        if not self:
+            return 0
         return self.bbl.x
 
     @property
     def y(self):
+        if not self:
+            return 0
         return self.bbl.y
 
     @property
     def w(self):
+        if not self:
+            return 0
         return self.fur.x - self.bbl.x
 
     @property
     def h(self):
+        if not self:
+            return 0
         return self.fur.y - self.bbl.y
 
     def __bool__(self):

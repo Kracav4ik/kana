@@ -6,7 +6,14 @@ from PyQt5.QtGui import QPainter, QPainterPath
 from PyQt5.QtWidgets import QWidget
 
 from detectors.bbox import AABB
+from detectors.line import LineDetector
 from utils import Vec2d
+
+
+KATA_I = [
+    LineDetector(3, Vec2d(2, 0), Vec2d(0, 1)),
+    LineDetector(3, Vec2d(1, 1), Vec2d(1, 2)),
+]
 
 
 class Curve:
@@ -53,7 +60,10 @@ class TabletWidget(QWidget):
         self.curves_list = []
         ":type: list[PointsList]"
 
-        self.aabb = AABB()
+        self.detectors = KATA_I
+        ":type: list[LineDetector]"
+
+        self.aabb = AABB(Vec2d(130, 1), Vec2d(330, 200))
         self.create_curve()
 
     def create_curve(self):
@@ -71,7 +81,12 @@ class TabletWidget(QWidget):
             p.setPen(Qt.blue)
             p.drawRect(self.aabb.x, self.aabb.y, self.aabb.w, self.aabb.h)
 
-        for curve in self.get_curves():
+        curves = self.get_curves()
+        if len(self.detectors) > len(curves):
+            detector = self.detectors[len(curves)]
+            detector.paint(p, self.aabb)
+
+        for curve in curves:
             curve.paint_to(p)
 
     def clear_canvas(self):
@@ -91,6 +106,9 @@ class TabletWidget(QWidget):
         self.aabb.extend(pos)
         if pressure == 0:
             print('  finished with', len(self.current_curve.points), 'points')
+            if len(self.detectors) == len(self.curves_list):
+                for curve, detector in zip(self.curves_list, self.detectors):
+                    print('detector %s: match %s' % (detector, detector.is_matched_line(curve, self.aabb)))
             self.create_curve()
 
         event.accept()
