@@ -11,7 +11,7 @@ from utils import Vec2d
 
 
 KATA_I = [
-    LineDetector(3, Vec2d(2, 0), Vec2d(0, 1)),
+    LineDetector(3, Vec2d(2, 0), Vec2d(0, 1.5)),
     LineDetector(3, Vec2d(1, 1), Vec2d(1, 2)),
 ]
 
@@ -19,6 +19,7 @@ KATA_I = [
 class Curve:
     def __init__(self):
         self.points = []
+        """list[tuple[Vec2d, float]]"""
 
     def add_point(self, pos, pressure):
         self.points.append((pos, pressure))
@@ -49,16 +50,19 @@ class Curve:
     def __bool__(self):
         return bool(self.points)
 
+    def is_finished(self):
+        return self.points and self.points[-1][1] == 0
+
 
 class TabletWidget(QWidget):
     def __init__(self, *args):
         super().__init__(*args)
 
         self.current_curve = None
-        ":type: PointsList"
+        ":type: Curve"
 
         self.curves_list = []
-        ":type: list[PointsList]"
+        ":type: list[Curve]"
 
         self.detectors = KATA_I
         ":type: list[LineDetector]"
@@ -67,6 +71,7 @@ class TabletWidget(QWidget):
         self.create_curve()
 
     def create_curve(self):
+        self.aabb = AABB(Vec2d(130, 1), Vec2d(330, 200))
         self.current_curve = Curve()
         self.curves_list.append(self.current_curve)
 
@@ -82,8 +87,9 @@ class TabletWidget(QWidget):
             p.drawRect(self.aabb.x, self.aabb.y, self.aabb.w, self.aabb.h)
 
         curves = self.get_curves()
-        if len(self.detectors) > len(curves):
-            detector = self.detectors[len(curves)]
+        finished_curves = [curve for curve in curves if curve.is_finished()]
+        if len(self.detectors) > len(finished_curves):
+            detector = self.detectors[len(finished_curves)]
             detector.paint(p, self.aabb)
 
         for curve in curves:
@@ -102,6 +108,9 @@ class TabletWidget(QWidget):
         pressure = event.pressure()
         pos = Vec2d.from_qt(event.posF())
         print('Tablet!', pos, pressure)
+        if not self.current_curve and pressure == 0:
+            print('  ignoring empty dot without pressure')
+            return
         self.current_curve.add_point(pos, pressure)
         self.aabb.extend(pos)
         if pressure == 0:
