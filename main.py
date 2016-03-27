@@ -10,7 +10,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem, QHeaderView, QFileDialog
 from PyQt5 import uic
 
-from two_sides import has_kana, get_kana, make_kana_list
+from two_sides import has_kana, get_kana, make_kana_list, HIRA, KATA
 
 
 class MagicalKanaRect(QGraphicsRectItem):
@@ -85,7 +85,20 @@ class MainWindow(QMainWindow):
 
         self.clearButton.clicked.connect(self.tabletWidget.clear_canvas)
 
+        for button in [self.hiraButton, self.kataButton]:
+            button.clicked.connect(self.on_katahira_clicked)
+        self.kana_letters = []
+
         self.on_nextButton_clicked()
+        self.on_nextWordButton_clicked()
+
+    def _set_kana_letters(self, letters):
+        self.kana_letters = list(letters)
+        text = ''
+        kana = HIRA if self.hiraButton.isChecked() else KATA
+        for x, y in self.kana_letters:
+            text += get_kana(x, y, kana)
+        self.kanaLabel.setText(text)
 
     @pyqtSlot()
     def on_kana_check_clicked(self):
@@ -93,6 +106,13 @@ class MainWindow(QMainWindow):
         if not self.hiraCheck.isChecked() and not self.kataCheck.isChecked():
             other = self.hiraCheck if sender == self.kataCheck else self.kataCheck
             other.setChecked(True)
+
+    @pyqtSlot(bool)
+    def on_katahira_clicked(self, checked):
+        sender = self.sender()
+        other = self.hiraButton if sender == self.kataButton else self.kataButton
+        other.setChecked(not checked)
+        self._set_kana_letters(self.kana_letters)
 
     @pyqtSlot()
     def on_nextButton_clicked(self):
@@ -136,6 +156,17 @@ class MainWindow(QMainWindow):
         if not load_path:
             return
         self.tabletWidget.load(load_path)
+
+    @pyqtSlot()
+    def on_nextWordButton_clicked(self):
+        repeat_count = self.repeatCount.value()
+        allowed_vowels = [number for number, checkbox in enumerate(self.vowels) if checkbox.isChecked()]
+        if not allowed_vowels:
+            self.kanaLabel.setText('')
+            return
+
+        kana_list = make_kana_list(self.levelSlider.value(), allowed_vowels)
+        self._set_kana_letters(random.choice(kana_list) for _ in range(repeat_count))
 
 
 if __name__ == '__main__':

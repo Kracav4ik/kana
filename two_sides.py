@@ -32,9 +32,22 @@ kana_map_ru = (
     ('',  'ВО', 'РО', 'Ё', 'МО', 'ХО', 'НО', 'ТО', 'СО', 'КО', 'О'),
 )
 
+KATA = 'katakana'
+HIRA = 'hiragana'
+EN = 'english'
+RU = 'russian'
 
-def get_kana(x, y):
-    return kana_map_en[y][x]
+kana_tables = {
+    KATA: katakana_map,
+    HIRA: hiragana_map,
+    EN: kana_map_en,
+    RU: kana_map_ru,
+}
+
+
+def get_kana(x, y, table=EN):
+    table = kana_tables[table]
+    return table[y][x]
 
 
 def has_kana(x, y):
