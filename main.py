@@ -10,26 +10,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsRectItem, QHeaderView, QFileDialog
 from PyQt5 import uic
 
-
-kana_map = (
-    ('N', 'WA', 'RA', 'YA', 'MA', 'HA', 'NA', 'TA',  'SA',  'KA', 'A'),
-    ('',  'WI', 'RI', '',   'MI', 'HI', 'NI', 'CHI', 'SHI', 'KI', 'I'),
-    ('',  '',   'RU', 'YU', 'MU', 'FU', 'NU', 'TSU', 'SU',  'KU', 'U'),
-    ('',  'WE', 'RE', '',   'ME', 'HE', 'NE', 'TE',  'SE',  'KE', 'E'),
-    ('',  'WO', 'RO', 'YO', 'MO', 'HO', 'NO', 'TO',  'SO',  'KO', 'O'),
-)
-
-
-def get_kana(x, y):
-    return kana_map[y][x]
-
-
-def has_kana(x, y):
-    return 0 <= y < len(kana_map) and 0 <= x < len(kana_map[y]) and get_kana(x, y)
-
-
-def make_kana_list(level, allowed):
-    return [(x, y) for x in range(level, 11) for y in allowed if has_kana(x, y)]
+from two_sides import has_kana, get_kana, make_kana_list
 
 
 class MagicalKanaRect(QGraphicsRectItem):

@@ -31,3 +31,17 @@ kana_map_ru = (
     ('',  'ВЭ', 'РЭ', '',  'МЭ', 'ХЭ', 'НЭ', 'ТЭ', 'СЭ', 'КЭ', 'Э'),
     ('',  'ВО', 'РО', 'Ё', 'МО', 'ХО', 'НО', 'ТО', 'СО', 'КО', 'О'),
 )
+
+
+def get_kana(x, y):
+    return kana_map_en[y][x]
+
+
+def has_kana(x, y):
+    return 0 <= y < len(kana_map_en) and 0 <= x < len(kana_map_en[y]) and get_kana(x, y)
+
+
+def make_kana_list(level, allowed):
+    return [(x, y) for x in range(level, 11) for y in allowed if has_kana(x, y)]
+
+
