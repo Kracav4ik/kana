@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>573</width>
-    <height>690</height>
+    <height>679</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -39,7 +39,7 @@
       <item>
        <widget class="QPushButton" name="nextButton">
         <property name="text">
-         <string>Next</string>
+         <string>Дальше</string>
         </property>
        </widget>
       </item>
@@ -124,14 +124,14 @@
       <property name="minimumSize">
        <size>
         <width>341</width>
-        <height>181</height>
+        <height>191</height>
        </size>
       </property>
       <widget class="QCheckBox" name="useO">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>150</y>
+         <x>250</x>
+         <y>144</y>
          <width>70</width>
          <height>17</height>
         </rect>
@@ -146,8 +146,8 @@
       <widget class="QCheckBox" name="useA">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>70</y>
+         <x>250</x>
+         <y>64</y>
          <width>70</width>
          <height>17</height>
         </rect>
@@ -162,8 +162,8 @@
       <widget class="QCheckBox" name="useI">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>90</y>
+         <x>250</x>
+         <y>84</y>
          <width>70</width>
          <height>17</height>
         </rect>
@@ -175,14 +175,20 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QTableWidget" name="tableWidget">
+      <widget class="QTableWidget" name="kanaTable">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>45</y>
+         <x>4</x>
+         <y>39</y>
          <width>239</width>
          <height>125</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
@@ -339,11 +345,17 @@
       <widget class="QSlider" name="levelSlider">
        <property name="geometry">
         <rect>
-         <x>15</x>
-         <y>15</y>
+         <x>9</x>
+         <y>9</y>
          <width>211</width>
          <height>20</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="maximum">
         <number>10</number>
@@ -367,8 +379,8 @@
       <widget class="QCheckBox" name="useE">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>130</y>
+         <x>250</x>
+         <y>124</y>
          <width>70</width>
          <height>17</height>
         </rect>
@@ -383,8 +395,8 @@
       <widget class="QCheckBox" name="useU">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>110</y>
+         <x>250</x>
+         <y>104</y>
          <width>70</width>
          <height>17</height>
         </rect>
@@ -396,14 +408,35 @@
         <bool>true</bool>
        </property>
       </widget>
-      <zorder>useO</zorder>
-      <zorder>useA</zorder>
-      <zorder>useI</zorder>
-      <zorder>tableWidget</zorder>
-      <zorder>levelSlider</zorder>
-      <zorder>useE</zorder>
-      <zorder>useU</zorder>
-      <zorder>widget_2</zorder>
+      <widget class="QCheckBox" name="showStats">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>171</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Показывать статистику</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="widget_5" native="true">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>20</y>
+         <width>16</width>
+         <height>16</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
     </item>
     <item row="2" column="0" colspan="3">
@@ -448,7 +481,7 @@
          <item>
           <widget class="QPushButton" name="nextWordButton">
            <property name="text">
-            <string>Next</string>
+            <string>Дальше</string>
            </property>
           </widget>
          </item>
@@ -553,7 +586,7 @@
            <item>
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>count</string>
+              <string>к-во</string>
              </property>
             </widget>
            </item>
@@ -594,16 +627,6 @@
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>573</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
